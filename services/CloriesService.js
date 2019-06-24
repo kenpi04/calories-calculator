@@ -8,8 +8,11 @@ var CloriesService = {
     searchData: async (keyword, pageIndex = 0, pageSize = 10) => {
 
         let query = `SELECT {1} FROM Calories WHERE 1=1`;
-        if (keyword && keyword.length > 0)
-            query += ` AND shrt_desc like '%${keyword}'`;
+        let params=[];
+        if (keyword && keyword.length > 0)        {
+            query += ` AND shrt_desc  ~* '${keyword}'`;
+            params.push(keyword);
+        }
       // await client.connect();
         try {
 
