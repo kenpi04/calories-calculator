@@ -76,14 +76,14 @@
                             <thead class="text-sm">
                                 <tr>
                                     <th>Food</th>
-                                    <th>Quantity</th>
-                                    <th>Serving Size</th>
-                                    <th>Calories</th>
-                                    <th>Fat</th>
-                                    <th>Protein</th>
-                                    <th>Carbs*</th>
-                                    <th>Fiber</th>
-                                    <th>Total Sugar</th>
+                                    <th width="200">Quantity</th>
+                                    <th width="200">Serving Size</th>
+                                    <th width="100">Calories</th>
+                                    <th width="100">Fat</th>
+                                    <th width="100">Protein</th>
+                                    <th width="100">Carbs*</th>
+                                    <th width="100">Fiber</th>
+                                    <th width="100">Total Sugar</th>
                                     <th></th>
                                 </tr>
                                 <tr ng-repeat="item in Data" ng-init="item.quantity=1">
@@ -106,15 +106,15 @@
                         <table class="table table-bordered table-striped mt-5">
                             <thead>
                                 <tr>
-                                    <th>Food</th>
-                                    <th>Quantity</th>
-                                    <th>Serving Size</th>
-                                    <th>Calories</th>
-                                    <th>Fat</th>
-                                    <th>Protein</th>
-                                    <th>Carbs*</th>
-                                    <th>Fiber</th>
-                                    <th>Total Sugar</th>
+                                        <th>Food</th>
+                                        <th width="200">Quantity</th>
+                                        <th width="200">Serving Size</th>
+                                        <th width="100">Calories</th>
+                                        <th width="100">Fat</th>
+                                        <th width="100">Protein</th>
+                                        <th width="100">Carbs*</th>
+                                        <th width="100">Fiber</th>
+                                        <th width="100">Total Sugar</th>
                                     <th></th>
                                 </tr>
                                 <tr ng-repeat="item in CalculateData">
@@ -136,12 +136,12 @@
                                     <td></td>
                                     <td></td>
                                     <td>Sub Totals</td>
-                                    <td ng-bind="Total.energ_kcal"></td>
-                                    <td ng-bind="Total.lipid_tot"></td>
-                                    <td ng-bind="Total.protein"></td>
-                                    <td ng-bind="Total.carbohydrt"></td>
-                                    <td ng-bind="Total.fiber_td"></td>
-                                    <td ng-bind="Total.sugar_tot"></td>
+                                    <td ng-bind="Total.energ_kcal|number:'2'"></td>
+                                    <td ng-bind="Total.lipid_tot|number:'2'"></td>
+                                    <td ng-bind="Total.protein|number:'2'"></td>
+                                    <td ng-bind="Total.carbohydrt|number:'2'"></td>
+                                    <td ng-bind="Total.fiber_td|number:'2'"></td>
+                                    <td ng-bind="Total.sugar_tot|number:'2'"></td>
                                     <td></td>
                                 </tr>
                             </thead>
