@@ -86,10 +86,10 @@
                                     <th width="100">Total Sugar</th>
                                     <th></th>
                                 </tr>
-                                <tr ng-repeat="item in Data" ng-init="item.quantity=1">
+                                <tr ng-repeat="item in Data" ng-init="item.quantity=1;item.servingsize='100 gram'">
                                         <td ng-bind="item.shrt_desc"></td>
-                                        <td ng-bind="item.quantity"></td>
-                                        <td ng-bind="'200 gram'"></td>
+                                        <td><input type="number" ng-model="item.quantity"/></td>
+                                        <td ng-bind="item.servingsize"></td>
                                         <td ng-bind="item.energ_kcal*item.quantity"></td>
                                         <td ng-bind="item.lipid_tot*item.quantity"></td>
                                         <td ng-bind="item.protein*item.quantity"></td>
@@ -120,7 +120,7 @@
                                 <tr ng-repeat="item in CalculateData">
                                     <td ng-bind="item.shrt_desc"></td>
                                     <td ng-bind="item.quantity"></td>
-                                    <td ng-bind="item.servingsize+'gram'"></td>
+                                    <td ng-bind="item.servingsize"></td>
                                     <td ng-bind="item.energ_kcal*item.quantity"></td>
                                     <td ng-bind="item.lipid_tot*item.quantity"></td>
                                     <td ng-bind="item.protein*item.quantity"></td>
