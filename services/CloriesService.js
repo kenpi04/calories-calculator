@@ -7,6 +7,8 @@ var CloriesService = {
 
     searchData: async (keyword, pageIndex = 0, pageSize = 10) => {
 
+        if(!pageSize||pageSize==0)
+            pageSize=10;
         let query = `SELECT {1} FROM Calories WHERE 1=1`;
         let params=[];
         if (keyword && keyword.length > 0)        {
