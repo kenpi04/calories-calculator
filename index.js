@@ -22,7 +22,7 @@ app.get('/search',async(req,res)=>{
     
  
 });
-app.get('/api/search',(req,res)=>{
+app.get('/api/search',async(req,res)=>{
   const keyword=req.query.keyword;  
   var data=await CloriesService.searchData(keyword,0,10);
   res.send(data.Items);    
