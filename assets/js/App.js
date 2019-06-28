@@ -66,3 +66,28 @@ app.controller("HomePageController", ['$scope','$http', function ($scope,$http) 
     }
 
 }]);
+
+app.controller("ZaloController", ['$scope','$http', function ($scope,$http) {
+
+    var IsBusy=false;
+    $scope.GetUserId = () => {
+        if(IsBusy)
+        return;
+         IsBusy=true;
+        var dataSearch = {
+           phone:$scope.Phone
+        };
+        var config={
+            params:dataSearch
+        };
+        $http.get('/zalo/getuserid', config).then((response)=>{      
+            IsBusy=false;  
+            $scope.UserId = response;
+        },(err)=>{
+            IsBusy=false;
+            console.log(err);
+        });
+    }
+    
+
+}]);

@@ -116,4 +116,41 @@ const callSendAPI = (sender_psid, response, cb = null) => {
 let getToken=()=>{
   return 'EAAGhJcJzaDsBAKZBUixkZCEy2XeTZBuoElrXNC9NNeKrodd8l1iIRcAQO8z6cSqOKCB7KWhxRRtNc5GlReXeufr46fXdZASfqKwTtjmbaZCgaT3l9sQ3TeVPKdO9XGGHNqqottbXpvJS1UgVmOLajZCqqfZAFNoQJxQuBcFskXvXDMcpHPZCUYMH';
 }
+
+//zalo
+let getZaloToken=()=>{
+  return 'L9VE04xT6aXHbya3JjCQJLQOmGfEobC17lxWF7VZKt0v_lb-VSbuRptthsf4-nbRBEAtQ3_SCoHIn84oD8rHUN79yMbhtcPt5SpHRmVcUt55tQj01ii-SdJMx5yHs44HTSBhMZx4R4fCsyDSFfPfP56opNeUerfF0Uk0PHB0B4rBxur38z8Q3d_NYY4xnbaNVVdA1X_rS2jOyQeRHRbyFYAky2v4k4i26xUVBbdyJMLUri1HBFv1Hc_HctPomp5jDk_gVad2Qd4svyn_UcugVE9_JSKOIG';
+}
+app.get('/zalologin',(req,res)=>{
+  res.sendFile(path.join(__dirname,'/views/zalo.html'));
+})
+app.get('/zalo',(req,res)=>{
+  if(!req.query.access_token)
+    res.send("Not authorize");
+  else
+    {
+      console.log(req.query.access_token);
+      res.send(req.query.access_token);
+    }
+});
+app.get('/zalo/getuserId',(req,res)=>{
+
+  let phoneNumber=req.query.phone;
+  var url="https://openapi.zalo.me/v2.0/oa/getprofile?access_token="+getZaloToken()+`&data={user_id:${phoneNumber}}`;
+  console.log(phoneNumber,url);
+  request({
+    "uri":url , 
+    "method": "GET",
+  },(err, response, body) => {
+    if (!err) {
+        console.log(body);
+        res.send(body);
+    } else {
+        console.error("Unable to send message:" + err);
+        res.send(err);
+    }
+})
+
+})
+
 app.listen(PORT,()=>console.log("servicer start at"+PORT));
