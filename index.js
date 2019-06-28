@@ -73,14 +73,46 @@ app.post('/webhook', (req, res) => {
       // will only ever contain one message, so we get index 0
       let webhook_event = entry.messaging[0];
       console.log(webhook_event);
+      callSendAPI(webhook_event.recipient.id,"Xin chào",()=>{
+          console.log("send success");
+      })
     });
 
     // Returns a '200 OK' response to all requests
     res.status(200).send('EVENT_RECEIVED');
+   
   } else {
     // Returns a '404 Not Found' if event is not from a page subscription
     res.sendStatus(404);
   }
 
 });
+const callSendAPI = (sender_psid, response, cb = null) => {
+  // Construct the message body
+  let request_body = {
+      "recipient": {
+          "id": sender_psid
+      },
+      "message": response
+  };
+
+  // Send the HTTP request to the Messenger Platform
+  request({
+      "uri": "https://graph.facebook.com/v2.6/me/messages",
+      "qs": { "access_token":getToken() },
+      "method": "POST",
+      "json": request_body
+  }, (err, res, body) => {
+      if (!err) {
+          if(cb){
+              cb();
+          }
+      } else {
+          console.error("Unable to send message:" + err);
+      }
+  });
+}
+let getToken=()=>{
+  return 'EAAGhJcJzaDsBAKZBUixkZCEy2XeTZBuoElrXNC9NNeKrodd8l1iIRcAQO8z6cSqOKCB7KWhxRRtNc5GlReXeufr46fXdZASfqKwTtjmbaZCgaT3l9sQ3TeVPKdO9XGGHNqqottbXpvJS1UgVmOLajZCqqfZAFNoQJxQuBcFskXvXDMcpHPZCUYMH';
+}
 app.listen(PORT,()=>console.log("servicer start at"+PORT));
