@@ -1,8 +1,12 @@
 const CloriesService =require("./services/CloriesService.js");
 const express =require("express");
+var bodyParser = require('body-parser');
 const path=require("path");
 const app=express();
 const PORT = process.env.PORT || 6969;
+
+app.use(express.json()) // for parsing application/json
+app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
 app.use(express.static(path.join(__dirname, 'assets')))
   .set('views', path.join(__dirname, 'views'))
@@ -58,8 +62,7 @@ app.get('/webhook', (req, res) => {
 app.post('/webhook', (req, res) => {  
  
   let body = req.body;
-
-  console.log(body);
+ 
   // Checks this is an event from a page subscription
   if (body.object === 'page') {
 
