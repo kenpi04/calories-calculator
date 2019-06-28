@@ -28,4 +28,7 @@ app.get('/api/search',async(req,res)=>{
   res.send(data.Items);    
 
 })
+app.get('/facebook/webhook',async(req,res)=>{
+    res.send(req.query);
+})
 app.listen(PORT,()=>console.log("servicer start at"+PORT));
