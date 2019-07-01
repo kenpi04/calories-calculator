@@ -74,9 +74,9 @@ app.post('/webhook', (req, res) => {
       // will only ever contain one message, so we get index 0
       let webhook_event = entry.messaging[0];
       console.log(webhook_event);
-      callSendAPI(webhook_event.sender.id,"Xin chào",()=>{
+     /* callSendAPI(webhook_event.sender.id,"Xin chào",()=>{
           console.log("send success");
-      })
+      })*/
     });
 
     // Returns a '200 OK' response to all requests
@@ -88,6 +88,17 @@ app.post('/webhook', (req, res) => {
   }
 
 });
+app.get('/facebook',(req,res)=>{
+  res.sendFile(path.join(__dirname,'/views/facebook.html'));
+})
+app.post('/facebook/sendMsg',(req,res)=>{
+    let msg=req.body.msg;
+    let senderId=req.body.sender;    
+    callSendAPI(senderId,msg,()=>{
+      res.status(200).send("OK");
+    });
+})
+
 const callSendAPI = (sender_psid, response, cb = null) => {
   // Construct the message body
   let request_body = {

@@ -91,3 +91,28 @@ app.controller("ZaloController", ['$scope','$http', function ($scope,$http) {
     
 
 }]);
+app.controller("FacebookController", ['$scope','$http', function ($scope,$http) {
+
+    var IsBusy=false;
+    $scope.Send = () => {
+        if(IsBusy)
+        return;
+         IsBusy=true;
+        var dataPost = {
+           Sender:$scope.Sender,
+           Msg:$scope.Msg
+        };
+        var config={
+            params:dataPost
+        };
+        $http.get('/facebook/sendMsg', config).then((response)=>{      
+            IsBusy=false;  
+            $scope.Status = response;
+        },(err)=>{
+            IsBusy=false;
+            console.log(err);
+        });
+    }
+    
+
+}]);
